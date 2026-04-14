@@ -1,0 +1,363 @@
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #1a1a2e;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* App Container */
+.app {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+/* Settings Overlay */
+.settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(26, 26, 46, 0.98);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 20px;
+}
+
+/* Settings Screen */
+.settings-screen {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.settings-screen h1 {
+  text-align: center;
+  color: #FFD700;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Setting Sections */
+.setting-section {
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.setting-section h3 {
+  color: #4A90E2;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+/* Mode Toggle */
+.mode-toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.mode-toggle button {
+  flex: 1;
+  padding: 12px 20px;
+  border: 2px solid #4A90E2;
+  background: transparent;
+  color: #4A90E2;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.mode-toggle button:hover {
+  background: rgba(74, 144, 226, 0.1);
+}
+
+.mode-toggle button.active {
+  background: #4A90E2;
+  color: white;
+}
+
+.hint {
+  color: #888;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* Duration Slider */
+input[type="range"] {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.1);
+  outline: none;
+  margin: 10px 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4A90E2;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.duration-display {
+  display: inline-block;
+  background: #4A90E2;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+/* Players List */
+.players-list {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+
+.player-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 8px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+}
+
+.player-row input[type="text"] {
+  flex: 2;
+}
+
+.player-row input[type="number"] {
+  flex: 1;
+  max-width: 100px;
+}
+
+.add-player-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  background: rgba(74, 144, 226, 0.1);
+  border-radius: 8px;
+  border: 2px dashed #4A90E2;
+}
+
+.add-player-row input[type="text"] {
+  flex: 2;
+}
+
+.add-player-row input[type="number"] {
+  flex: 1;
+  max-width: 100px;
+}
+
+/* Input Styles */
+input[type="text"],
+input[type="number"] {
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: white;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: #4A90E2;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.remove-btn {
+  background: #ff4757;
+  color: white;
+  padding: 8px 12px;
+}
+
+.remove-btn:hover {
+  background: #ff6b81;
+}
+
+.add-player-row button {
+  background: #2ed573;
+  color: white;
+}
+
+.add-player-row button:hover {
+  background: #7bed9f;
+}
+
+/* Audio Uploads */
+.audio-uploads {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.audio-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.audio-row label {
+  min-width: 150px;
+  color: #aaa;
+}
+
+.audio-row input[type="file"] {
+  flex: 1;
+  padding: 8px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px;
+  color: #aaa;
+}
+
+.audio-row button {
+  background: #ff4757;
+  color: white;
+  padding: 8px 15px;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.start-btn {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #1a1a2e;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 20px 60px;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+  transition: all 0.3s;
+}
+
+.start-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+}
+
+.start-btn:disabled {
+  background: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.reset-btn {
+  background: transparent;
+  border: 2px solid #ff4757;
+  color: #ff4757;
+}
+
+.reset-btn:hover {
+  background: rgba(255, 71, 87, 0.1);
+}
+
+/* Back Button */
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 50;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  border: 2px solid #4A90E2;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.back-btn:hover {
+  background: #4A90E2;
+}
+
+/* Game Container */
+.game-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4A90E2;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5BA0F2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .settings-screen h1 {
+    font-size: 1.8rem;
+  }
+  
+  .mode-toggle {
+    flex-direction: column;
+  }
+  
+  .player-row,
+  .add-player-row {
+    flex-wrap: wrap;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .start-btn {
+    width: 100%;
+  }
+}
