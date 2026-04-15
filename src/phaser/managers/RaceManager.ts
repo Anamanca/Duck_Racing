@@ -172,6 +172,7 @@ export class RaceManager {
   }
   
 private drawDecorations() {
+    if (this.lanes.length === 0) return;
     const firstLane = this.lanes[0];
     const lastLane = this.lanes[this.lanes.length - 1];
 
@@ -378,12 +379,12 @@ private drawDecorations() {
     // Standing sticks with balls
     for (let i = 0; i < 3; i++) {
       const stickY = top + 60 + i * 200;
-      this.scene.add.text(rightBound + 150, stickY, '🎈', {
+      const balloon = this.scene.add.text(rightBound + 150, stickY, '🎈', {
         fontSize: '30px'
       }).setOrigin(0.5);
 
       this.scene.tweens.add({
-        targets: this.scene.children.getByName(`ball_${i}`),
+        targets: balloon,
         y: stickY - 20,
         duration: 1500,
         yoyo: true,
