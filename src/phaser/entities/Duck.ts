@@ -61,16 +61,72 @@ export class Duck extends Phaser.GameObjects.Container {
   
   private createPlaceholderDuck(scene: Phaser.Scene) {
     const graphics = scene.add.graphics();
-    graphics.fillStyle(0xFFD700, 1);
-    graphics.fillEllipse(0, 0, 40, 25);
-    graphics.fillCircle(15, -10, 12);
-    graphics.fillStyle(0xFF8C00, 1);
-    graphics.fillEllipse(25, -10, 12, 6);
-    graphics.fillStyle(0x000000, 1);
-    graphics.fillCircle(18, -12, 2);
-    graphics.fillStyle(0xFFA500, 1);
-    graphics.fillEllipse(-5, 2, 18, 10);
-    graphics.generateTexture('duck', 60, 50);
+
+    // Duck colors
+    const bodyColor = 0xFFD700;      // Golden yellow
+    const bodyHighlight = 0xFFEC8B;   // Light gold
+    const beakColor = 0xFF8C00;      // Dark orange
+    const beakHighlight = 0xFFA500;  // Orange
+    const eyeColor = 0x000000;       // Black
+    const eyeHighlight = 0xFFFFFF;   // White
+    const wingColor = 0xDAA520;      // Goldenrod
+
+    // Shadow under duck
+    graphics.fillStyle(0x000000, 0.2);
+    graphics.fillEllipse(2, 18, 45, 15);
+
+    // Body (main ellipse) with gradient effect
+    graphics.fillStyle(bodyColor, 1);
+    graphics.fillEllipse(0, 5, 45, 28);
+
+    // Body highlight (top shine)
+    graphics.fillStyle(bodyHighlight, 0.6);
+    graphics.fillEllipse(-5, -2, 30, 15);
+
+    // Tail feathers
+    graphics.fillStyle(wingColor, 1);
+    graphics.fillTriangle(-25, 0, -35, -8, -35, 12);
+
+    // Wing
+    graphics.fillStyle(wingColor, 1);
+    graphics.fillEllipse(-8, 8, 25, 15);
+    graphics.fillStyle(bodyColor, 0.7);
+    graphics.fillEllipse(-8, 6, 18, 10);
+
+    // Head
+    graphics.fillStyle(bodyColor, 1);
+    graphics.fillCircle(18, -8, 14);
+
+    // Head highlight
+    graphics.fillStyle(bodyHighlight, 0.5);
+    graphics.fillCircle(15, -12, 8);
+
+    // Beak
+    graphics.fillStyle(beakColor, 1);
+    graphics.fillTriangle(28, -8, 42, -6, 28, 0);
+
+    // Beak highlight
+    graphics.fillStyle(beakHighlight, 0.7);
+    graphics.fillTriangle(28, -8, 38, -7, 28, -3);
+
+    // Eye white
+    graphics.fillStyle(eyeHighlight, 1);
+    graphics.fillCircle(22, -12, 5);
+
+    // Eye pupil
+    graphics.fillStyle(eyeColor, 1);
+    graphics.fillCircle(23, -12, 3);
+
+    // Eye shine
+    graphics.fillStyle(eyeHighlight, 1);
+    graphics.fillCircle(24, -13, 1.5);
+
+    // Cheek blush
+    graphics.fillStyle(0xFFB6C1, 0.4);
+    graphics.fillCircle(20, -4, 4);
+
+    // Generate texture at larger size for better quality
+    graphics.generateTexture('duck', 80, 60);
     graphics.destroy();
     this.sprite = scene.add.sprite(0, 0, 'duck');
   }

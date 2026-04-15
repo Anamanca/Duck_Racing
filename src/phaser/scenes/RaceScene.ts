@@ -45,52 +45,93 @@ export class RaceScene extends Phaser.Scene {
       this.startRace();
     });
   }
-  
+
   private createSky() {
-    const cloudPositions = [
-      { x: 100, y: 80 },
-      { x: 300, y: 120 },
-      { x: 600, y: 60 },
-      { x: 900, y: 100 }
+    // Multiple cloud layers with different speeds
+    const cloudLayers = [
+      { emoji: '☁️', size: 55, speed: 4000, y: 70, count: 4 },
+      { emoji: '🌤️', size: 45, speed: 6000, y: 110, count: 3 },
+      { emoji: '☁️', size: 40, speed: 3000, y: 90, count: 5 }
     ];
-    
-    cloudPositions.forEach((pos, i) => {
-      const cloud = this.add.text(pos.x, pos.y, '☁️', {
-        fontSize: '50px'
-      }).setOrigin(0.5);
-      
+
+    cloudLayers.forEach(layer => {
+      for (let i = 0; i < layer.count; i++) {
+        const x = (i / layer.count) * this.cameras.main.width + Math.random() * 200;
+        const cloud = this.add.text(x, layer.y, layer.emoji, {
+          fontSize: `${layer.size}px`
+        }).setOrigin(0.5);
+
+        // Floating animation
+        this.tweens.add({
+          targets: cloud,
+          x: x + 50 + Math.random() * 100,
+          y: layer.y + (Math.random() - 0.5) * 20,
+          duration: layer.speed,
+          yoyo: true,
+          repeat: -1,
+          ease: 'Sine.easeInOut'
+        });
+      }
+    });
+
+    // Sun with rays
+    const sunX = this.cameras.main.width - 120;
+    const sunY = 70;
+
+    // Sun glow
+    const sunGlow = this.add.graphics();
+    sunGlow.fillStyle(0xFFFF66, 0.2);
+    sunGlow.fillCircle(sunX, sunY, 60);
+    this.tweens.add({
+      targets: sunGlow,
+      scale: { from: 1, to: 1.1 },
+      alpha: { from: 0.2, to: 0.4 },
+      duration: 2000,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut'
+    });
+
+    // Sun core
+    this.add.text(sunX, sunY, '🌞', {
+      fontSize: '50px'
+    }).setOrigin(0.5);
+
+    this.createBirds();
+  }
+
+  private createBirds() {
+    const birdEmojis = ['🐦', '🦅', '🕊️', '🐦‍⬛'];
+
+    // Flying birds with varying speeds
+    for (let i = 0; i < 5; i++) {
+      const bird = this.add.text(
+        -50 - i * 150,
+        40 + Math.random() * 80,
+        birdEmojis[i % birdEmojis.length],
+        { fontSize: `${20 + Math.random() * 15}px` }
+      );
+
+      // Wing flap animation
       this.tweens.add({
-        targets: cloud,
-        x: pos.x + 30,
-        duration: 3000 + i * 500,
+        targets: bird,
+        y: bird.y + 10,
+        duration: 200 + Math.random() * 100,
         yoyo: true,
         repeat: -1,
         ease: 'Sine.easeInOut'
       });
-    });
-    
-    this.createBirds();
-  }
-  
-  private createBirds() {
-    const birdEmojis = ['🐦', '🦅', '🕊️'];
-    
-    for (let i = 0; i < 3; i++) {
-      const bird = this.add.text(
-        -50 - i * 100,
-        50 + Math.random() * 100,
-        birdEmojis[i],
-        { fontSize: '24px' }
-      );
-      
+
+      // Fly across screen
       this.tweens.add({
         targets: bird,
         x: this.cameras.main.width + 100,
-        duration: 8000 + i * 2000,
+        duration: 10000 + i * 2000,
         repeat: -1,
         ease: 'Linear',
+        delay: i * 3000,
         onRepeat: () => {
-          bird.y = 50 + Math.random() * 100;
+          bird.y = 40 + Math.random() * 80;
         }
       });
     }
