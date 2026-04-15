@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import * as Phaser from 'phaser'
 import { useRaceStore } from './store/raceStore'
 import { SettingsScreen } from './components/SettingsScreen'
+import { ResultsScreen } from './components/ResultsScreen'
 import { gameConfig } from './phaser/game'
 import { BootScene } from './phaser/scenes/BootScene'
 import { CountdownScene } from './phaser/scenes/CountdownScene'
@@ -14,6 +15,7 @@ function App() {
   const containerRef = useRef<HTMLDivElement>(null)
   const { gameState, setGameState } = useRaceStore()
   const [showSettings, setShowSettings] = useState(true)
+  const [showResults, setShowResults] = useState(false)
   const isGameStarted = useRef(false)
 
   // Initialize Phaser game
@@ -38,15 +40,20 @@ function App() {
   useEffect(() => {
     if (gameState === 'settings') {
       setShowSettings(true)
+      setShowResults(false)
+    } else if (gameState === 'finished') {
+      setShowResults(true)
     } else {
       setShowSettings(false)
+      setShowResults(false)
     }
   }, [gameState])
 
   const handleStartRace = () => {
     setShowSettings(false)
+    setShowResults(false)
     setGameState('countdown')
-    
+
     if (gameRef.current && !isGameStarted.current) {
       isGameStarted.current = true
       // Add scenes dynamically
@@ -68,6 +75,27 @@ function App() {
     }
   }
 
+  const handleBackToSettings = () => {
+    setGameState('settings')
+    setShowSettings(true)
+    setShowResults(false)
+    isGameStarted.current = false
+    if (gameRef.current) {
+      // Stop all scenes
+      ['BootScene', 'CountdownScene', 'RaceScene', 'FinishScene'].forEach(sceneKey => {
+        const scene = gameRef.current!.scene.getScene(sceneKey)
+        if (scene) {
+          gameRef.current!.scene.stop(sceneKey)
+        }
+      })
+      // Remove scenes to allow fresh start
+      gameRef.current.scene.remove('BootScene')
+      gameRef.current.scene.remove('CountdownScene')
+      gameRef.current.scene.remove('RaceScene')
+      gameRef.current.scene.remove('FinishScene')
+    }
+  }
+
   return (
     <div className="app">
       {/* Settings Overlay */}
@@ -78,42 +106,19 @@ function App() {
       )}
 
       {/* Phaser Game Container */}
-      <div 
-        ref={containerRef} 
+      <div
+        ref={containerRef}
         className="game-container"
-        style={{ 
-          width: '100vw', 
+        style={{
+          width: '100vw',
           height: '100vh',
-          display: showSettings ? 'none' : 'block'
+          display: showSettings || showResults ? 'none' : 'block'
         }}
       />
 
-      {/* Back to Settings Button */}
-      {!showSettings && gameState === 'finished' && (
-        <button 
-          className="back-btn"
-          onClick={() => {
-            setGameState('settings')
-            setShowSettings(true)
-            isGameStarted.current = false
-            if (gameRef.current) {
-              // Stop all scenes
-              ['BootScene', 'CountdownScene', 'RaceScene', 'FinishScene'].forEach(sceneKey => {
-                const scene = gameRef.current!.scene.getScene(sceneKey)
-                if (scene) {
-                  gameRef.current!.scene.stop(sceneKey)
-                }
-              })
-              // Remove scenes to allow fresh start
-              gameRef.current.scene.remove('BootScene')
-              gameRef.current.scene.remove('CountdownScene')
-              gameRef.current.scene.remove('RaceScene')
-              gameRef.current.scene.remove('FinishScene')
-            }
-          }}
-        >
-          Back to Settings
-        </button>
+      {/* Results Overlay */}
+      {showResults && (
+        <ResultsScreen onBackToSettings={handleBackToSettings} />
       )}
     </div>
   )
