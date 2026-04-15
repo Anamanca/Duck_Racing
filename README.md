@@ -26,14 +26,18 @@ A fun and interactive duck racing web application built with React, TypeScript, 
 ### 🎨 Visual Features
 - **Extended track** - 75% of screen width for longer races
 - **Checkered start/finish zones** - Racing flag pattern
-- **Double-sized ducks** (1.2x scale) for better visibility
+- **Detailed ducks** with long neck, wing feathers, tail, and blush
 - **Large bold player names** (28px) with 6px stroke
 - **Animated decorations**:
-  - 🌊 Flowing river with wave effects and wake trails
-  - 🌳 Trees and 🌸 flowers on riverbanks
-  - 🦌 Animals watching (deer, crocodile, elephant, bear on left)
-  - 🦛 Cheering animals (hippo, dog, cat, ostrich on right)
-  - ☁️ Floating clouds and 🐦 flying birds
+  - 🌊 Flowing river with gradient, reflections, and multi-layer wave effects
+  - 🌳 Diverse trees (🌳🌲🎄🌴) with sway animation
+  - 🌸 Animated flowers and 🍄 mushrooms on riverbanks
+  - 🦌 Animals watching (deer, crocodile, elephant, bear, squirrel on left)
+  - 🦛 Cheering animals (hippo, dog, cat, ostrich, duck, bird on right)
+  - 🐸 Frogs on lily pads with bounce animation
+  - 🎉 Cheering banners and balloons
+  - ☁️ Multi-layer floating clouds and 🐦 flying birds
+  - 🌞 Sun with glow effects
 
 ### 🎭 Duck Effects & Emotions
 Each duck displays emotions based on their state:
@@ -132,7 +136,8 @@ npm run preview
 duck-racing/
 ├── src/
 │   ├── components/
-│   │   └── SettingsScreen.tsx    # React UI for race configuration
+│   │   ├── SettingsScreen.tsx    # React UI for race configuration
+│   │   └── ResultsScreen.tsx     # React scrollable results with celebration
 │   │
 │   ├── core/
 │   │   ├── types/
@@ -252,12 +257,17 @@ Example:
 - Firework particle effects
 
 ### Emoji Decorations
-- Trees: 🌳
-- Flowers: 🌸 🌺 🌻 🌷 🌼
-- Animals Left: 🦌 🐊 🐘 🐻
-- Animals Right: 🦛 🐕 🐈 🐦 🦅
-- Clouds: ☁️
-- Birds: 🐦 🦅 🕊️
+- Trees: 🌳 🌲 🎄 🌴
+- Flowers: 🌸 🌺 🌻 🌷 🌼 💐 🌹
+- Mushrooms: 🍄 🍁
+- Lily Pads: 🪷
+- Animals Left: 🦌 🐊 🐘 🐻 🐿️
+- Animals Right: 🦛 🐕 🐈 🐦 🦅 🐇 🦆
+- Frogs: 🐸
+- Banners: 🎉 🎈 🎗️
+- Clouds: ☁️ 🌤️
+- Birds: 🐦 🦅 🕊️ 🐦‍⬛
+- Sun: 🌞 ☀️
 
 ### Duck Effects System
 
@@ -312,6 +322,23 @@ Example:
 - Close other browser tabs
 
 ## 📝 Recent Updates
+
+### Version 2.1 - UI & Visual Improvements
+
+**Results Screen:**
+- ✅ New React-based scrollable results screen
+- ✅ Shows all players with scrollbar for large lists
+- ✅ Celebration effects: confetti 🎉, fireworks 🎆, glow animations
+- ✅ Winner announcement with sparkles and pulse effects
+- ✅ Animated result rows with slide-in effects
+
+**Racing Graphics Improvements:**
+- ✅ Detailed duck with long neck, wing feathers, tail, blush
+- ✅ Enhanced river with water gradient, reflections, multiple wave layers
+- ✅ Beautiful sky gradient with sun glow effects
+- ✅ More decorations: diverse trees (🌳🌲🎄🌴), animated flowers, mushrooms 🍄
+- ✅ Additional animals: squirrels 🐿️, rabbits 🐇, frogs on lily pads 🐸🪷
+- ✅ Cheering banners and balloons 🎉🎈
 
 ### Version 2.0 - Major Enhancements
 
