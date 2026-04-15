@@ -5,7 +5,7 @@
   "description": "A fun and interactive duck racing game built with React and Phaser",
   "author": "Duck Racing Team",
   "type": "module",
-  "main": "electron/main.js",
+  "main": "electron/main.cjs",
   "homepage": "./",
   "scripts": {
     "dev": "vite",
